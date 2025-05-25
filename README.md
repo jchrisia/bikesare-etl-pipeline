@@ -28,7 +28,6 @@ scripts/
   8.Find the busiest hour of the day (most trips started).sql
   9.Identify the day with the highest number of trips.sql
   extract_bikeshare.py : Extracts trip data from public data to partitions
-  service_account.json
 Dockerfile
 docker-compose.yaml
 requirements.txt
@@ -136,11 +135,11 @@ cd bikeshare-etl-pipeline
 2. Ensure `docker-compose.yaml` mounts your service account and sets the GCP credential path:
 ```yaml
     volumes:
-    - ./scripts/service_account.json:/opt/airflow/service_account/service_account.json
+    - ./scripts/service_account.json:/opt/yourpath/yourpath/service_account.json
 
     environment:
       <<: *airflow-common-env
-      GOOGLE_APPLICATION_CREDENTIALS: /opt/airflow/service_account/service_account.json
+      GOOGLE_APPLICATION_CREDENTIALS: /opt/yourpath/yourpath/service_account.json
 ```
 This ensures that each Airflow service can authenticate with Google Cloud using the mounted service account credentials.
 
@@ -259,9 +258,9 @@ Solution:
 1. Make sure `service_account.json` is correctly mounted in `docker-compose.yaml`:
 ```yaml
 volumes:
-  - ./scripts/service_account.json:/opt/airflow/service_account/service_account.json
+  - ./scripts/service_account.json:/opt/yourpath/yourpath/service_account.json
 environment:
-  GOOGLE_APPLICATION_CREDENTIALS: /opt/airflow/service_account/service_account.json
+  GOOGLE_APPLICATION_CREDENTIALS: /opt/yourpath/yourpath/service_account.json
 ```
 2. Check the service account has these roles:
 - BigQuery User
